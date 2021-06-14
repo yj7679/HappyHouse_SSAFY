@@ -1,0 +1,5 @@
+npm install babel router vuex eslint bootstrap bootstrap-vue
+npm install --save vuex-persistedstate
+npm install vuejs-paginate --save
+
+
