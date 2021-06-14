@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.repo.MemberMapper">
+
+	<select id="login" parameterType="map" resultType="Member">
+		select id, pwd, name, email, phone, address
+		from members
+		where id = #{userid} and pwd = #{userpwd}
+	</select>
+	
+	<select id="selectAll" resultType="Member">
+		select id, pwd, name, email, phone , address
+		from members
+	</select>
+	
+	<select id="searchId" parameterType="String" resultType="Member">
+		select id, pwd, name, email, phone, address
+		from members
+		where id = #{id}
+	</select>
+
+	<insert id="insertMember" parameterType="Member">
+		insert into members (id, pwd, name, email, phone, address)
+		values (#{id}, #{pwd}, #{name}, #{email},#{phone}, #{address})
+	</insert>
+	
+	<update id="update" parameterType="Member">
+		update members
+		set pwd = #{pwd}, email = #{email}, phone = #{phone}, address = #{address},
+		name = #{name}
+		where id = #{id}
+	</update>
+	
+	<delete id="remove" parameterType="String">
+		delete from members
+		where id = #{id}
+	</delete>
+	
+</mapper>

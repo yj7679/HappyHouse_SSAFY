@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.repo.HouseMapper">
+
+
+	<!-- 동별 실거래가 검색 -->
+	<select id="searchDong" resultType="HouseDeal">
+
+		select	d.no, i.dong, i.aptname, d.dealamount, d.dealYear, d.dealMonth, d.dealDay, d.area
+		from housedeal d join houseinfo i
+		on d.infoNo = i.no
+		where    infoNo in (
+				select	houseinfo.no
+						from 	houseinfo
+				where 	dong like concat('%', #{word}, '%')
+							) 				
+		order by d.no desc
+	</select>
+	
+	<!-- 아파트별 실거래가 검색 -->
+	<select id="searchAptName" resultType="HouseDeal">
+		select	d.no, i.dong, i.aptname, d.dealamount, d.dealYear, d.dealMonth, d.dealDay, d.area
+		from housedeal d join houseinfo i
+		on d.infoNo = i.no
+		where    infoNo in (
+				select	houseinfo.no
+						from 	houseinfo
+				where 	AptName like concat('%', #{word}, '%')
+							)
+		order by d.no desc
+	</select>
+		
+	
+	<!-- 전체 실거래가  -->
+	<select id="searchAll" resultType="HouseDeal">
+		select *
+			from housedeal
+	</select>
+	
+
+
+</mapper>
